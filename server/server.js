@@ -1,14 +1,21 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pmController from "./pmController.js";
+import pm from "./PubMedAPI.js";
 
 // Initialize express app
 const app = express();
 app.use(bodyParser.json());
 const PORT = 3000;
 
-app.get("/search", pmController.initiateSearch, pmController.completeSearch, (req, res) => {
-  res.status(200).json(res.locals.response);
+app.get("/search", pmController.getNumRecords, (req, res) => {
+  const { response } = res.locals;
+  const { task_id, query, records } = response;
+
+  // These function is async, so will not block the reposnse getting to the client
+  pm.getIds(query, records);
+
+  res.status(200).json(response);
 });
 
 // app.get("/fetch/:task_id", pmController.fetch, (req, res) => {});
