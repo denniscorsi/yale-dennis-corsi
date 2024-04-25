@@ -8,8 +8,7 @@ pmController.getNumRecords = async (req, res, next) => {
     const { term } = req.query;
 
     const numRecords = await pm.getNumRecords(term);
-
-    const task_id = await pm.initiatePendingTask(numRecords);
+    const task_id = await pm.initiatePendingTask();
 
     const response = {
       records: numRecords,

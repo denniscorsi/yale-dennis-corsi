@@ -12,7 +12,7 @@ app.get("/search", pmController.getNumRecords, (req, res) => {
   const { response } = res.locals;
   const { task_id, query, records } = response;
 
-  // These function is async, so will not block the reposnse getting to the client
+  // This function is async, so will not block the response getting to the client
   pm.getIds(task_id, query, records);
 
   res.status(200).json(response);

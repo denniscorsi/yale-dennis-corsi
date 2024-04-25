@@ -14,7 +14,7 @@ pm.getNumRecords = async (term) => {
   return numRecords;
 };
 
-pm.initiatePendingTask = async (numRecords) => {
+pm.initiatePendingTask = async () => {
   const task_id = await db.addPendingTask();
   return task_id;
 };
