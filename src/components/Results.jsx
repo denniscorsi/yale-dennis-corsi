@@ -27,7 +27,7 @@ const Results = ({ setIsLoading, taskId }) => {
 
   useEffect(() => {
     checkTask();
-  });
+  }, [taskId]);
 
   return (
     <Box id="results-container">
