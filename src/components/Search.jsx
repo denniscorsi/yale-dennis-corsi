@@ -5,16 +5,17 @@ const CustomTextField = styled(TextField)({
   "& .MuiFilledInput-root": {
     backgroundColor: "lightgray",
     "&:hover": {
-      backgroundColor: "lightgray" 
+      backgroundColor: "lightgray"
     },
     "&.Mui-focused": {
-      backgroundColor: "lightgray" 
+      backgroundColor: "lightgray"
     }
   }
 });
 
-const Search = ({ setTaskId, setNumRecords }) => {
+const Search = ({ setIsLoading, setTaskId, setNumRecords }) => {
   const onSubmit = () => {
+    setIsLoading(true);
     const query = document.getElementById("query").value;
     fetch(`/search/?term=${query}`)
       .then((res) => res.json())

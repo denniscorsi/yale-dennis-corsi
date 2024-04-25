@@ -12,16 +12,16 @@ function App() {
   const [numRecords, setNumRecords] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (taskId) setIsLoading(true);
-  }, [taskId]);
+  // useEffect(() => {
+  //   if (taskId) setIsLoading(true);
+  // }, [taskId]);
 
   return (
     <>
       <Typography variant="h1">PubMed Search</Typography>
-      <Search setTaskId={setTaskId} setNumRecords={setNumRecords} />
+      <Search setIsLoading={setIsLoading} setTaskId={setTaskId} setNumRecords={setNumRecords} />
       <Loading isLoading={isLoading} taskId={taskId} numRecords={numRecords} />
-      {taskId && !isLoading && <Results setIsLoading={setIsLoading} taskId={taskId} />}
+      {taskId && <Results isLoading={isLoading} setIsLoading={setIsLoading} taskId={taskId} />}
     </>
   );
 }

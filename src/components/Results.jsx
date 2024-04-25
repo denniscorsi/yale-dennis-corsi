@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import Pmid from "./Pmid";
 import PageControl from "./PageControl";
 
-const Results = ({ setIsLoading, taskId }) => {
+const Results = ({ isLoading, setIsLoading, taskId }) => {
   const [PmidComponents, setPmidComponents] = useState([]);
   const [pmids, setPmids] = useState([]);
   const [numPages, setNumPages] = useState();
@@ -39,11 +39,15 @@ const Results = ({ setIsLoading, taskId }) => {
   }, [page, pmids]);
 
   return (
-    <Box id="results-container">
-      <Typography variant="h5">RESULTS</Typography>
-      {PmidComponents}
-      <PageControl numPages={numPages} page={page} setPage={setPage} />
-    </Box>
+    <>
+      {!isLoading && (
+        <Box id="results-container">
+          <Typography variant="h5">RESULTS</Typography>
+          {PmidComponents}
+          <PageControl numPages={numPages} page={page} setPage={setPage} />
+        </Box>
+      )}
+    </>
   );
 };
 
