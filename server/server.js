@@ -13,7 +13,7 @@ app.get("/search", pmController.getNumRecords, (req, res) => {
   const { task_id, query, records } = response;
 
   // These function is async, so will not block the reposnse getting to the client
-  pm.getIds(query, records);
+  pm.getIds(task_id, query, records);
 
   res.status(200).json(response);
 });
@@ -39,4 +39,3 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
-

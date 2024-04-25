@@ -24,13 +24,24 @@ pmController.getNumRecords = async (req, res, next) => {
 pmController.fetchTask = async (req, res, next) => {
   const { task_id } = req.params;
   const task = await db.getTask(task_id);
-  console.log(task);
+  console.log("returned task:", task);
 
   if (task.status === "processing") {
     const response = {
       task_id: task.task_id,
       status: task.status,
       created_time: task.created_time
+    };
+    res.locals.response = response;
+  } else if (task.status === "completed") {
+    const response = {
+      task_id: task.task_id,
+      status: task.status,
+      results: {
+        pmids: JSON.parse(task.result)
+      },
+      created_time: task.created_time,
+      run_seconds: task.run_seconds
     };
     res.locals.response = response;
   }
