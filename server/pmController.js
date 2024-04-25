@@ -15,11 +15,26 @@ pmController.getNumRecords = async (req, res, next) => {
     query: term,
     task_id: task_id
   };
-  console.log(response);
-
-
 
   res.locals.response = response;
+  return next();
+};
+
+// TODO: error handling if task id does not exists
+pmController.fetchTask = async (req, res, next) => {
+  const { task_id } = req.params;
+  const task = await db.getTask(task_id);
+  console.log(task);
+
+  if (task.status === "processing") {
+    const response = {
+      task_id: task.task_id,
+      status: task.status,
+      created_time: task.created_time
+    };
+    res.locals.response = response;
+  }
+
   return next();
 };
 

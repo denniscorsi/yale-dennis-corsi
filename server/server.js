@@ -18,7 +18,9 @@ app.get("/search", pmController.getNumRecords, (req, res) => {
   res.status(200).json(response);
 });
 
-// app.get("/fetch/:task_id", pmController.fetch, (req, res) => {});
+app.get("/fetch/:task_id", pmController.fetchTask, (req, res) => {
+  res.status(200).json(res.locals.response);
+});
 
 // Catch-all endpoint to send a 404 status
 app.use("*", (req, res) => {
@@ -37,3 +39,4 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+

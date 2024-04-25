@@ -25,4 +25,15 @@ db.addPendingTask = async () => {
   return task_id;
 };
 
+db.getTask = async (task_id) => {
+  const dbresponse = await pool.query(`
+    SELECT *
+    FROM tasks
+    WHERE task_id = '${task_id}'
+  `);
+
+  const task = dbresponse.rows[0];
+  return task;
+};
+
 export default db;
