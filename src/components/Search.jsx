@@ -1,4 +1,14 @@
-import { Box, TextField, Button, Typography } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+const CustomTextField = styled(TextField)({
+  "& .MuiFilledInput-root": {
+    backgroundColor: "lightgray"
+  },
+  "& label.Mui-focused": {
+    backgroundColor: "lightgray"
+  }
+});
 
 const Search = ({ setTaskId, setNumRecords }) => {
   const onSubmit = () => {
@@ -15,13 +25,13 @@ const Search = ({ setTaskId, setNumRecords }) => {
   return (
     <Box
       display="flex"
-      justifyContent="space-around"
+      justifyContent="space-between"
       alignItems="center"
       paddingBottom={3}
-      width="40%"
+      width="50%"
       margin="0px auto"
     >
-      <TextField id="query" label="query" variant="standard" />
+      <CustomTextField id="query" label="query" variant="filled" />
       <Button onClick={onSubmit} variant="contained">
         Search
       </Button>

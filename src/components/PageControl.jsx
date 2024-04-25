@@ -7,15 +7,17 @@ const PageControl = ({ numPages, page, setPage }) => {
 
   return (
     <>
-      <h3>Page Control</h3>
-      <p>On Page: {page}</p>
-      <p>Pages: {numPages}</p>
-      <Button variant="outlined" disabled={!(page - 1)} onClick={() => changePage(-1)}>
-        Previous Page
-      </Button>
-      <Button variant="outlined" onClick={() => changePage(1)}>
-        Next Page
-      </Button>
+      <h5>
+        On page {page} of {numPages}
+      </h5>
+      <Box display="flex" justifyContent="space-around">
+        <Button variant="outlined" disabled={!(page - 1)} onClick={() => changePage(-1)}>
+          Previous Page
+        </Button>
+        <Button variant="outlined" onClick={() => changePage(1)}>
+          Next Page
+        </Button>
+      </Box>
     </>
   );
 };

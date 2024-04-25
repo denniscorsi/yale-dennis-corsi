@@ -42,7 +42,7 @@ const Results = ({ setIsLoading, taskId }) => {
 
   return (
     <Box id="results-container">
-      <Typography variant="h5">Results</Typography>
+      <Typography variant="h5">RESULTS</Typography>
       {PmidComponents}
       <PageControl numPages={numPages} page={page} setPage={setPage} />
     </Box>
