@@ -24,7 +24,6 @@ pmController.getNumRecords = async (req, res, next) => {
 pmController.fetchTask = async (req, res, next) => {
   const { task_id } = req.params;
   const task = await db.getTask(task_id);
-  console.log("returned task:", task);
 
   if (task.status === "processing") {
     const response = {
