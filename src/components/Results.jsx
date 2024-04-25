@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, TextField, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Pmid from "./Pmid";
 import PageControl from "./PageControl";
 
@@ -13,11 +13,9 @@ const Results = ({ setIsLoading, taskId }) => {
     fetch(`/fetch/${taskId}`)
       .then((res) => res.json())
       .then((task) => {
-        console.log(task);
         if (task.status === "processing") {
           setTimeout(checkTask, 200);
         } else {
-          console.log("complete!");
           setPmids(task.results.pmids);
           setNumPages(Math.ceil(task.results.pmids.length / 10));
           setIsLoading(false);
@@ -28,7 +26,7 @@ const Results = ({ setIsLoading, taskId }) => {
   const createPmidComponents = () => {
     // Render 10 results per page
     const pmidSlice = pmids.slice((page - 1) * 10, page * 10);
-    const Pmids = pmidSlice.map((pmid) => <Pmid pmid={pmid} />);
+    const Pmids = pmidSlice.map((pmid) => <Pmid pmid={pmid} key={pmid} />);
     setPmidComponents(Pmids);
   };
 

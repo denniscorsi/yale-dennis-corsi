@@ -3,10 +3,13 @@ import { styled } from "@mui/material/styles";
 
 const CustomTextField = styled(TextField)({
   "& .MuiFilledInput-root": {
-    backgroundColor: "lightgray"
-  },
-  "& label.Mui-focused": {
-    backgroundColor: "lightgray"
+    backgroundColor: "lightgray",
+    "&:hover": {
+      backgroundColor: "lightgray" 
+    },
+    "&.Mui-focused": {
+      backgroundColor: "lightgray" 
+    }
   }
 });
 
@@ -16,7 +19,6 @@ const Search = ({ setTaskId, setNumRecords }) => {
     fetch(`/search/?term=${query}`)
       .then((res) => res.json())
       .then((task) => {
-        console.log(task);
         setTaskId(task.task_id);
         setNumRecords(task.records);
       });

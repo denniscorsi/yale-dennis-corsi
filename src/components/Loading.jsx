@@ -1,4 +1,4 @@
-import { Typography, CircularProgress } from "@mui/material";
+import { Typography, CircularProgress, Box } from "@mui/material";
 
 const Loading = ({ isLoading, taskId, numRecords }) => {
   return (
@@ -13,7 +13,12 @@ const Loading = ({ isLoading, taskId, numRecords }) => {
           <strong>Number of records:</strong> {numRecords}
         </Typography>
       )}
-      {isLoading && <CircularProgress />}
+      {isLoading && (
+        <Box padding={4}>
+          {" "}
+          <CircularProgress />
+        </Box>
+      )}
     </>
   );
 };

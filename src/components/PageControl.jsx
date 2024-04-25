@@ -1,4 +1,4 @@
-import { Box, TextField, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 const PageControl = ({ numPages, page, setPage }) => {
   const changePage = (direction) => {

@@ -21,8 +21,6 @@ db.addPendingTask = async () => {
     RETURNING task_id;
   `);
 
-  console.log("Processing task is now in db");
-
   const task_id = dbresponse.rows[0].task_id;
   return task_id;
 };
@@ -48,8 +46,6 @@ db.addPmidsToTask = async (task_id, idList, runTime) => {
         run_seconds = ${runTime}
     WHERE task_id = '${task_id}';
   `);
-
-  console.log("Task is complete");
 };
 
 export default db;

@@ -22,8 +22,6 @@ pm.initiatePendingTask = async (numRecords) => {
 pm.getIds = async (task_id, term, numRecords) => {
   const startTime = Date.now();
 
-  console.log("fetching all ids");
-
   const res = await fetch(
     `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${term}&retmax=${numRecords}&retmode=json`
   );
