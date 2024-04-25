@@ -31,7 +31,7 @@ pm.getIds = async (task_id, term, numRecords) => {
   const idList = data.esearchresult.idlist;
 
   const endTime = Date.now();
-  const runTime = (endTime - startTime) / 1000;
+  const runTime = Math.floor((endTime - startTime) / 1000);
 
   db.addPmidsToTask(task_id, idList, runTime);
 };

@@ -26,12 +26,14 @@ db.addPendingTask = async () => {
 };
 
 db.getTask = async (task_id) => {
-  // TODO: paramterize the query
-  const dbresponse = await pool.query(`
+  const dbresponse = await pool.query(
+    `
     SELECT *
     FROM tasks
-    WHERE task_id = '${task_id}'
-  `);
+    WHERE task_id = $1
+  `,
+    [task_id]
+  );
 
   const task = dbresponse.rows[0];
   return task;
@@ -39,13 +41,16 @@ db.getTask = async (task_id) => {
 
 db.addPmidsToTask = async (task_id, idList, runTime) => {
   const idsString = JSON.stringify(idList);
-  await pool.query(`
+  await pool.query(
+    `
     UPDATE tasks
     SET status = 'completed',
-        result = '${idsString}',
-        run_seconds = ${runTime}
-    WHERE task_id = '${task_id}';
-  `);
+        result = $1,
+        run_seconds = $2
+    WHERE task_id = $3;
+  `,
+    [idsString, runTime, task_id]
+  );
 };
 
 export default db;
