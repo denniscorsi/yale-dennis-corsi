@@ -6,7 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/v1": {
+      "/search": {
+        target: "http://localhost:3000"
+      },
+      "/fetch": {
         target: "http://localhost:3000"
       }
     }
