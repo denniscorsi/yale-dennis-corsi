@@ -21,7 +21,9 @@ function App() {
       <Typography variant="h1">PubMed Search</Typography>
       <Search setTaskId={setTaskId} setNumRecords={setNumRecords} />
       <Loading isLoading={isLoading} taskId={taskId} numRecords={numRecords} />
-      <Results />
+      {taskId && !isLoading && (
+        <Results isLoading={isLoading} setIsLoading={setIsLoading} taskId={taskId} />
+      )}
     </>
   );
 }
