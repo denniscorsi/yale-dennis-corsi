@@ -1,11 +1,15 @@
 import { Box, TextField, Button, Typography } from "@mui/material";
 
-const Search = () => {
+const Search = ({ setTaskId, setNumRecords }) => {
   const onSubmit = () => {
     const query = document.getElementById("query").value;
     fetch(`/search/?term=${query}`)
       .then((res) => res.json())
-      .then((task) => console.log(task));
+      .then((task) => {
+        console.log(task);
+        setTaskId(task.task_id);
+        setNumRecords(task.records);
+      });
   };
 
   return (
