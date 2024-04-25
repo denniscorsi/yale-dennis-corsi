@@ -4,48 +4,59 @@ import pm from "./PubMedAPI.js";
 const pmController = {};
 
 pmController.getNumRecords = async (req, res, next) => {
-  const { term } = req.query;
+  try {
+    const { term } = req.query;
 
-  const numRecords = await pm.getNumRecords(term);
+    const numRecords = await pm.getNumRecords(term);
 
-  const task_id = await pm.initiatePendingTask(numRecords);
+    const task_id = await pm.initiatePendingTask(numRecords);
 
-  const response = {
-    records: numRecords,
-    query: term,
-    task_id: task_id
-  };
+    const response = {
+      records: numRecords,
+      query: term,
+      task_id: task_id
+    };
 
-  res.locals.response = response;
-  return next();
+    res.locals.response = response;
+    return next();
+  } catch (err) {
+    return next({
+      log: err
+    });
+  }
 };
 
-// TODO: error handling if task id does not exists
 pmController.fetchTask = async (req, res, next) => {
-  const { task_id } = req.params;
-  const task = await db.getTask(task_id);
+  try {
+    const { task_id } = req.params;
+    const task = await db.getTask(task_id);
 
-  if (task.status === "processing") {
-    const response = {
-      task_id: task.task_id,
-      status: task.status,
-      created_time: task.created_time
-    };
-    res.locals.response = response;
-  } else if (task.status === "completed") {
-    const response = {
-      task_id: task.task_id,
-      status: task.status,
-      results: {
-        pmids: JSON.parse(task.result)
-      },
-      created_time: task.created_time,
-      run_seconds: task.run_seconds
-    };
-    res.locals.response = response;
+    if (task.status === "processing") {
+      const response = {
+        task_id: task.task_id,
+        status: task.status,
+        created_time: task.created_time
+      };
+      res.locals.response = response;
+    } else if (task.status === "completed") {
+      const response = {
+        task_id: task.task_id,
+        status: task.status,
+        results: {
+          pmids: JSON.parse(task.result)
+        },
+        created_time: task.created_time,
+        run_seconds: task.run_seconds
+      };
+      res.locals.response = response;
+    }
+
+    return next();
+  } catch (err) {
+    return next({
+      log: err
+    });
   }
-
-  return next();
 };
 
 export default pmController;
